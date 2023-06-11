@@ -43,10 +43,7 @@ const storage = multer.diskStorage({
   },
 });
 const upload = multer({ storage });
-app.use(
-  "https://snapify-social-app.onrender.com/assets",
-  express.static(path.join(__dirname, "public/assets"))
-);
+app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 
 /* ROUTES WITH FILES */
 app.post("/auth/register", upload.single("picture"), register);
