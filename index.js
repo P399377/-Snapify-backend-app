@@ -32,7 +32,6 @@ app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 
 app.use(cors());
-app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 
 /* FILE STORAGE */
 const storage = multer.diskStorage({
@@ -40,11 +39,11 @@ const storage = multer.diskStorage({
     cb(null, "public/assets");
   },
   filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    cb(null, file.originalname + "-" + uniqueSuffix);
+    cb(null, file.originalname);
   },
 });
 const upload = multer({ storage });
+app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 
 /* ROUTES WITH FILES */
 app.post("/auth/register", upload.single("picture"), register);
