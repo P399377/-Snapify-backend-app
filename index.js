@@ -44,7 +44,7 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 app.use(
-  "https://snapify-social-api.onrender.com/public/assets/",
+  "https://snapify-social-api.onrender.com/assets/",
   express.static(path.join(__dirname, "public/assets"))
 );
 
